@@ -3,7 +3,9 @@ import bodyParser from 'body-parser';
 import 'reflect-metadata';
 import _ from 'lodash';
 import { dbConnection } from './connection/Connection';
-import { getStatusCode, errorHandler } from './Utils';
+import { getStatusCode } from './Utils';
+import { errorHandler } from './middleware/ErrorHandler';
+import { authenticate } from './middleware/Authenticator';
 import { routes } from './router';
 
 const app = express();
@@ -18,7 +20,7 @@ app.use(
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)
-})
+});
 
 app.get('/', (request, response) => {
   response.json({ data: 'Welcome to the movie API' });
@@ -27,7 +29,7 @@ app.get('/', (request, response) => {
 dbConnection
   .then(() => {
     _.forEach(routes, route => {
-      app[route.method](route.path, (req, res, next) => {
+      app[route.method](route.path, authenticate, (req, res, next) => {
         route.handler(req, res)
           .then(data => {
             const content = _.isArray(data) ? { data } : data;

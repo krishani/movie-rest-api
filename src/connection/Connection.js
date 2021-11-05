@@ -10,6 +10,6 @@ export const dbConnection = createConnection({
    "synchronize": true,
    "logging": false,
    "entities": [
-      "src/entity/Movie.js"
+      "src/entity/**.js"
    ],
 });
