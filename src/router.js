@@ -36,11 +36,11 @@ export const routes = [
   {
     path: '/signup',
     method: RequestMethod.POST,
-    handler: loginController.signUp    // TODO REMOVE AFTER ADDING FEW USERS
+    handler: loginController.signUp
   },
   {
     path: '/users',
-    method: RequestMethod.POST,
+    method: RequestMethod.GET,
     handler: loginController.getAllUsers
   }
 ];

@@ -23,5 +23,9 @@ module.exports = new EntitySchema({
     role: {
       type: "varchar"
     },
+    salt: {
+      type: "varchar",
+      nullable: true
+    }
   },
 });

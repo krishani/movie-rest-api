@@ -1,12 +1,11 @@
 import { getRepository } from 'typeorm';
 
-export const getUser = async (username, password) => {
-  return await getRepository('User').findOne({ username, password });
+export const getUser = async (username) => {
+  return await getRepository('User').findOne({ username });
 };
 
-// TODO remove this later after adding few users
-export const addUser = async (username, password) => {
-  return await getRepository('User').save({ username, password, role: 'admin'});
+export const addUser = async (username, hash, salt) => {
+  return await getRepository('User').save({ username, password: hash, role: 'admin', salt });
 };
 
 // TODO remove this later after adding few users

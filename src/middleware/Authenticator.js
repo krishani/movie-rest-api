@@ -4,7 +4,7 @@ import { CLIENT_SECRET } from '../Configs';
 
 export const authenticate = async (req, res, next) => {
   const currentPath = req.route.path;
-  if (currentPath === '/login') {
+  if (currentPath === '/login' || currentPath === '/signup') {
     next();
   } else {
     const authHeader = req.headers.authorization;
