@@ -3,13 +3,13 @@ import bodyParser from 'body-parser';
 import 'reflect-metadata';
 import _ from 'lodash';
 import { dbConnection } from './connection/Connection';
-import { getStatusCode } from './Utils';
+import { getStatusCode, errorHandler } from './Utils';
 import { routes } from './router';
 
 const app = express();
 const port = 4000;
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -21,11 +21,11 @@ app.listen(port, () => {
 })
 
 app.get('/', (request, response) => {
-  response.json({ data: 'Our node rest api' })
+  response.json({ data: 'Welcome to the movie API' });
 });
 
 dbConnection
-  .then(connection => {
+  .then(() => {
     _.forEach(routes, route => {
       app[route.method](route.path, (req, res, next) => {
         route.handler(req, res)
@@ -36,7 +36,7 @@ dbConnection
           .catch(e => {
             next(e);
           })
-      })
+      }, errorHandler);
     })
 
   }).catch(err => {

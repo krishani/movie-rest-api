@@ -1,4 +1,6 @@
 import { getRepository, getConnection } from 'typeorm';
+import { isEmpty } from 'lodash';
+import { ResourceNotFoundError } from '../Errors';
 
 export const getAllMovies = async () => {
   console.log('[MovieRepository] Retreiving all movies');
@@ -6,7 +8,7 @@ export const getAllMovies = async () => {
 };
 
 export const getMovie = async (id) => {
-  return await getRepository('Movie').find({ id });
+  return await getRepository('Movie').findOneOrFail({ id });
 };
 
 export const insertMovie = async (movie) => {
@@ -15,7 +17,9 @@ export const insertMovie = async (movie) => {
 };
 
 export const deleteMovie = async (id) => {
-  await getRepository('Movie').remove({ id });
+  const movie = getRepository('Movie').findOne({ id });
+  if (isEmpty(movie)) throw new ResourceNotFoundError(`Movie doesn't exist for the given id`);
+  await getRepository('Movie').removeOne({ id });
   return null;
 };
 
@@ -29,3 +33,4 @@ export const insertBulkMovies = async (movies) => {
   return movies;
 };
 
+// TODO UPDATE MOVIE
