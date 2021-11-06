@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import 'reflect-metadata';
 import _ from 'lodash';
+import cors from 'cors';
 import { dbConnection } from './connection/Connection';
 import { getStatusCode } from './Utils';
 import { errorHandler } from './middleware/ErrorHandler';
@@ -17,6 +18,7 @@ app.use(
     extended: true,
   }),
 );
+app.use(cors());
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)
