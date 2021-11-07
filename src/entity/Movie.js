@@ -17,15 +17,18 @@ module.exports = new EntitySchema({
             nullable: false
         },
         description: {
-            type: "text"
+            type: "text",
+            nullable: true
         },
         thumbnail: {
-            type: "text"
+            type: "text",
+            nullable: true
+
         },
         releasedDate: {
-            type: "timestamp"
+            type: "timestamp",
+            nullable: true
         }
     },
 });
 
-// TODO check on the module.exports

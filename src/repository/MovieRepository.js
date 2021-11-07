@@ -33,4 +33,17 @@ export const insertBulkMovies = async (movies) => {
   return movies;
 };
 
-// TODO UPDATE MOVIE
+export const updateMovie = async (id, movie) => {
+  await getConnection()
+    .createQueryBuilder()
+    .update('Movie')
+    .set({
+      title: movie.title,
+      description: movie.description,
+      thumbnail: movie.thumbnail,
+      releasedDate: movie.releasedDate
+    })
+    .where('id = :id', { id })
+    .execute();
+  return null;
+};

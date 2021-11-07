@@ -12,17 +12,18 @@ export const getMovieById = async (req) => {
 
 export const addMovie = async (req) => {
   console.log('[MovieController] Request received to add movie');
-  return movieRepository.insertMovie(req.body);
+  return await movieRepository.insertMovie(req.body);
 };
 
 export const deleteMovie = async (req) => {
   console.log('[MovieController] Request received to delete movie by id');
-  return movieRepository.deleteMovie(req.params.id);
+  return await movieRepository.deleteMovie(req.params.id);
 };
 
 export const insertBulkMovies = async (req) => {
-    return movieRepository.insertBulkMovies(req.body.movies);
+    return await movieRepository.insertBulkMovies(req.body.movies);
 };
 
-// TODO update movie
-
+export const updateMovie = async (req) => {
+  return await movieRepository.updateMovie(req.params.id, req.body);
+};

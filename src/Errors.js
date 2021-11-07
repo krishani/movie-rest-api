@@ -5,7 +5,6 @@ class ResourceNotFoundError extends Error {
   }
 };
 
-// TODO check on the export here
 module.exports = {
   ResourceNotFoundError
 };

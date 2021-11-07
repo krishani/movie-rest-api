@@ -3,7 +3,7 @@ import * as loginRepository from '../repository/LoginRepository';
 import { CLIENT_SECRET, TOKEN_EXPIRATION_TIME } from '../Configs';
 import { hashPasswordWithSalt, validateLogin } from '../Utils';
 
-export const login = async (req, res) => {
+export const login = async (req) => {
   console.log('[LoginController] Request received to login');
   const { username, password } = req.body;
   const user = await loginRepository.getUser(username);
@@ -12,7 +12,7 @@ export const login = async (req, res) => {
   return { accessToken };
 };
 
-export const signUp = async (req, res) => {
+export const signUp = async (req) => {
   console.log('[LoginController] Request received to signup');
   const { username, password } = req.body;
   const { salt, hash } = hashPasswordWithSalt(password);
@@ -20,6 +20,6 @@ export const signUp = async (req, res) => {
   return { id: user.id, username: user.username };
 };
 
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async () => {
   return await loginRepository.getAllUsers();
 };

@@ -24,6 +24,11 @@ export const routes = [
     handler: movieController.deleteMovie,
   },
   {
+    path: '/movies/:id',
+    method: RequestMethod.PUT,
+    handler: movieController.updateMovie
+  },
+  {
     path: '/movies/bulk',
     method: RequestMethod.POST,
     handler: movieController.insertBulkMovies,
