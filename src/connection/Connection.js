@@ -2,7 +2,7 @@ import { createConnection } from 'typeorm';
 
 export const dbConnection = createConnection({
    "type": "postgres",
-   "host": "localhost",
+   "host": "db",
    "port": 5432,
    "username": "me",
    "password": "password",
@@ -10,6 +10,6 @@ export const dbConnection = createConnection({
    "synchronize": true,
    "logging": false,
    "entities": [
-      "src/entity/Movie.js"
+      "src/entity/**.js"
    ],
 });
