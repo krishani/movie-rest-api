@@ -17,9 +17,9 @@ export const insertMovie = async (movie) => {
 };
 
 export const deleteMovie = async (id) => {
-  const movie = getRepository('Movie').findOne({ id });
+  const movie = await getRepository('Movie').findOne({ id });
   if (isEmpty(movie)) throw new ResourceNotFoundError(`Movie doesn't exist for the given id`);
-  await getRepository('Movie').removeOne({ id });
+  await getRepository('Movie').remove({ id });
   return null;
 };
 
